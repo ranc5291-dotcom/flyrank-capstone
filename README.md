@@ -1,3 +1,4 @@
+ HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
@@ -30,3 +31,35 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+# FlyRank Frontend AI Capstone
+
+This repository is created as part of the FlyRank Frontend AI Engineering Internship.
+
+## Tech Stack
+
+- HTML
+- CSS
+- JavaScript
+- React
+- Node.js
+- Git
+- Cursor AI
+
+## Installation
+
+1. Clone the repository
+2. Open in Cursor
+3. Start building
+
+## Goals
+
+- Learn AI-assisted development
+- Follow Git best practices
+- Build frontend projects
+
+## Author
+
+HN Charan
+
+ 9b12b1c788f798168c336698ff89421e218497df
