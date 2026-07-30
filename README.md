@@ -1,65 +1,75 @@
- HEAD
-# React + TypeScript + Vite
+# AI Prompt Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Build, Organize and Execute AI Workflows**
 
-Currently, two official plugins are available:
+A productivity workspace for managing, iterating on, and organizing AI prompts — built as part of the FlyRank Frontend AI Engineering Internship.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-
-# FlyRank Frontend AI Capstone
-
-This repository is created as part of the FlyRank Frontend AI Engineering Internship.
+- **App:** https://flyrank-capstone-dun.vercel.app
+- **Repo:** https://github.com/ranc5291-dotcom/flyrank-capstone
 
 ## Tech Stack
 
-- HTML
-- CSS
-- JavaScript
-- React
-- Node.js
-- Git
-- Cursor AI
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- React Router v6
+- React Hook Form
+- jsPDF (PDF export)
 
-## Installation
+## Features (Completed)
 
-1. Clone the repository
-2. Open in Cursor
-3. Start building
+- **Dashboard** — stats overview, recent prompts, favourites, quick actions
+- **Prompt Library** — search, filter by category/model, sort, keyboard navigation
+- **Add/Edit Prompt** — form with validation, category and model assignment
+- **Favorites** — star and view favourite prompts
+- **Collections** — organize prompts into folders, assign/remove from prompt cards
+- **Imported Prompts** — dedicated view for prompts brought in via JSON import
+- **Settings** — dark mode, default AI model, export/import data (JSON), clear all data
+- **Health page** — live system status with fetched test data
+- **Authentication (UI-only)** — login/guest flow with persisted session state, no backend
+- **Dark mode** — full app-wide theme toggle, persisted across sessions
+- **Responsive design** — tested at mobile (375px) and desktop (1280px) widths
+- **Deployed to Vercel** — with client-side routing support (SPA rewrites)
 
-## Goals
+## Upcoming / Not Yet Built
 
-- Learn AI-assisted development
-- Follow Git best practices
-- Build frontend projects
+These are part of the original project scope but are planned for later weeks or as stretch goals:
+
+- **AI Workflow Builder** — goal-based prompt chains (e.g. "Apply for Internship" → Resume → Cover Letter → Interview Prep)
+- **AI Chat** — streaming responses, stop generation, multiple conversations (Gemini API)
+- **Prompt Quality Analyzer** — scoring and improvement suggestions for prompts
+- **AI Model Recommendation** — suggests the best model for a given prompt
+- **Accessibility Playground** — modal, tabs, and disclosure components built from scratch
+- **Version history** for prompts
+- **Team workspace** / collaboration
+- **Prompt analytics**
+- **Privacy scanner**
+
+## Getting Started
+
+```bash
+git clone https://github.com/ranc5291-dotcom/flyrank-capstone.git
+cd flyrank-capstone
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Development Notes
+
+This project was built with AI (Claude) as a development assistant — used for debugging TypeScript build errors, diagnosing a Tailwind v4 dark-mode configuration issue, resolving Git merge conflicts, and implementing features like Settings export/import and the collection-assignment picker on prompt cards. See submission notes for detailed examples of AI-assisted debugging and manual corrections made along the way.
 
 ## Author
 
 HN Charan
 
+## License
 
+See [LICENSE](./LICENSE)
