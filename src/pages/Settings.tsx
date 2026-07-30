@@ -50,7 +50,8 @@ export default function Settings() {
         const parsed = JSON.parse(reader.result as string)
         const importedPrompts = Array.isArray(parsed) ? parsed : parsed.prompts
         if (Array.isArray(importedPrompts)) {
-          const merged = [...importedPrompts, ...prompts]
+          const tagged = importedPrompts.map((p: any) => ({ ...p, imported: true }))
+          const merged = [...tagged, ...prompts]
           const deduped = Array.from(new Map(merged.map((p) => [p.id, p])).values())
           setPrompts(deduped)
           alert(`Imported ${importedPrompts.length} prompt(s).`)
