@@ -76,7 +76,7 @@ export default function Library() {
   return (
     <div>
       <BackHomeButton />
-      <h1 className="text-3xl font-bold mb-4">Prompt Library</h1>
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">Prompt Library</h1>
 
       <div className="space-y-3 mb-6">
         <input
@@ -84,7 +84,7 @@ export default function Library() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search prompts..."
-          className="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-transparent"
+          className="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-transparent text-gray-900 dark:text-gray-100"
         />
         <select
           value={collectionId}

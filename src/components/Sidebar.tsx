@@ -154,7 +154,7 @@ export default function Sidebar({ open, onClose, collapsed, onToggleCollapse }: 
           }`}
         >
           <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-md shrink-0" />
-          {!collapsed && <div className="text-lg font-semibold truncate">AI Prompt Studio</div>}
+          {!collapsed && <div className="text-lg font-semibold truncate text-gray-900 dark:text-gray-100">AI Prompt Studio</div>}
         </div>
 
         <nav className="p-4 flex-1 overflow-y-auto" onKeyDown={handleKeyDown}>

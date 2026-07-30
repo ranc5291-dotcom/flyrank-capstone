@@ -21,7 +21,7 @@ export default function Collections() {
   return (
     <div>
       <BackHomeButton />
-      <h1 className="text-2xl font-semibold mb-4">Your Collections</h1>
+      <h1 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Your Collections</h1>
 
       {collections.length === 0 ? (
         <p className="text-gray-600 dark:text-gray-300">
@@ -37,9 +37,9 @@ export default function Collections() {
               <div key={c.id} className="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <span className={`w-3 h-3 rounded-full ${c.color}`} />
-                  <h3 className="font-semibold">{c.name}</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100">{c.name}</h3>
                 </div>
-                <p className="text-sm text-gray-500 mb-3">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
                   {inCollection.length} prompt{inCollection.length === 1 ? '' : 's'}
                 </p>
 
@@ -70,7 +70,7 @@ export default function Collections() {
                   {openAddFor === c.id && (
                     <div className="absolute z-10 mt-1 w-full max-h-48 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg">
                       {notInCollection.length === 0 ? (
-                        <p className="text-xs text-gray-500 p-3">No other prompts available.</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 p-3">No other prompts available.</p>
                       ) : (
                         notInCollection.map((p) => (
                           <button

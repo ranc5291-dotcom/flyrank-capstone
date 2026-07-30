@@ -77,7 +77,7 @@ export default function Dashboard() {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Recent prompts</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Recent prompts</h2>
               <Link to="/library" className="text-sm text-indigo-600 hover:underline">View all</Link>
             </div>
 
@@ -90,7 +90,7 @@ export default function Dashboard() {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Favourite prompts</h2>
+             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Favourite prompts</h2>
               <Link to="/favorites" className="text-sm text-indigo-600 hover:underline">View favourites</Link>
             </div>
 
