@@ -32,7 +32,8 @@ export default function Dashboard() {
       try {
         const imported = JSON.parse(reader.result as string)
         if (Array.isArray(imported)) {
-          setPrompts([...imported, ...prompts])
+          const tagged = imported.map((p) => ({ ...p, imported: true }))
+          setPrompts([...tagged, ...prompts])
         }
       } catch {
         // ignore invalid file
