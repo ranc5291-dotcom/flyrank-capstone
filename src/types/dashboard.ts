@@ -14,8 +14,10 @@ export interface Prompt {
   collectionId?: string
   favorite: boolean
   createdAt: string
+  updatedAt?: string
   model?: string
   versions?: PromptVersion[]
+  imported?: boolean
 }
 
 export interface Category {
@@ -39,16 +41,4 @@ export interface DashboardStats {
   favorites: number
   collections: number
   recentEdits: number
-}
-export interface Prompt {
-  id: string
-  title: string
-  body: string
-  tags: string[]
-  collectionId?: string
-  favorite: boolean
-  createdAt: string
-  model?: string
-  versions?: PromptVersion[]
-  imported?: boolean
 }

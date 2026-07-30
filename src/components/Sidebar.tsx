@@ -164,7 +164,7 @@ export default function Sidebar({ open, onClose, collapsed, onToggleCollapse }: 
                 key={item.to}
                 to={item.to}
                 end={item.to === '/'}
-                ref={(el) => (itemRefs.current[i] = el)}
+                ref={(el) => { itemRefs.current[i] = el }}
                 onFocus={() => setFocusedIndex(i)}
                 title={collapsed ? item.label : undefined}
                 className={({ isActive }) =>

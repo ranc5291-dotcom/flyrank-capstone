@@ -139,7 +139,7 @@ export default function PromptList() {
         {filtered.map((p, i) => (
           <div
             key={p.id}
-            ref={(el) => (cardRefs.current[i] = el)}
+            ref={(el) => { cardRefs.current[i] = el }}
             tabIndex={0}
             role="gridcell"
             onKeyDown={(e) => handleGridKeyDown(e, i)}

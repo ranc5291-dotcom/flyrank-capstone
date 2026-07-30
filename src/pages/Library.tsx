@@ -125,7 +125,7 @@ export default function Library() {
           {filteredPrompts.map((prompt, i) => (
             <PromptCard
               key={prompt.id}
-              ref={(el) => (cardRefs.current[i] = el)}
+              ref={(el) => { cardRefs.current[i] = el }}
               prompt={prompt}
               selected={i === selectedIndex}
             />
