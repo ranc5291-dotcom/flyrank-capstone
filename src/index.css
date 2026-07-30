@@ -100,3 +100,12 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+select option {
+  color: #111827;
+  background-color: #fff;
+}
+
+.dark select option {
+  color: #f3f4f6;
+  background-color: #1f2937;
+}
