@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 
 interface ModalProps {
   isOpen: boolean
@@ -28,7 +29,9 @@ const FOCUSABLE_SELECTOR = [
  * - Focus is trapped inside the dialog while open (Tab / Shift+Tab wrap)
  * - Escape closes the dialog
  * - Focus returns to the element that opened the dialog, on close
- * - Background content is inert to screen readers via aria-hidden on siblings
+ * - Rendered via a portal directly under <body>, as a sibling of #root, so
+ *   the rest of the app (#root) can be hidden from assistive tech without
+ *   ever hiding the dialog itself (which would otherwise contain focus).
  */
 export function Modal({ isOpen, onClose, titleId, title, children }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -57,8 +60,10 @@ export function Modal({ isOpen, onClose, titleId, title, children }: ModalProps)
     }
   }, [isOpen])
 
-  // Hide the rest of the page from assistive tech while the dialog is open,
-  // and lock scroll on the body.
+  // Hide the rest of the app from assistive tech while the dialog is open
+  // (safe now: the dialog itself renders outside #root, via the portal
+  // below, so this never hides the currently-focused element), and lock
+  // scroll on the body.
   useEffect(() => {
     if (!isOpen) return
 
@@ -118,7 +123,7 @@ export function Modal({ isOpen, onClose, titleId, title, children }: ModalProps)
 
   if (!isOpen) return null
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       // Clicking the overlay (not the dialog itself) closes it, same as Escape.
@@ -149,6 +154,7 @@ export function Modal({ isOpen, onClose, titleId, title, children }: ModalProps)
         </div>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
