@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Collections from './pages/Collections'
 import Imported from './pages/Imported'
 import Health from './pages/Health'
+import { Playground } from './playground/Playground'
 
 export default function AppRoutes() {
   return (
@@ -25,6 +26,7 @@ export default function AppRoutes() {
         <Route path="settings" element={<Settings />} />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="health" element={<Health />} />
+        <Route path="playground" element={<Playground />} />
       </Route>
     </Routes>
   )

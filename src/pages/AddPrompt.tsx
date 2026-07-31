@@ -89,7 +89,7 @@ export default function AddPrompt() {
   return (
     <div className="max-w-3xl">
       <BackHomeButton />
-      <h1 className="text-2xl font-semibold mb-4">{editingPrompt ? 'Edit Prompt' : 'Add Prompt'}</h1>
+      <h1 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">{editingPrompt ? 'Edit Prompt' : 'Add Prompt'}</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleFormKeyDown} className="space-y-4">
         <div>
@@ -106,7 +106,7 @@ export default function AddPrompt() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Category</label>
+            <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-gray-100">Category</label>
             <FormField id="category" as="select" {...register('category')}>
               <option>Uncategorized</option>
               {collections.map((c) => (
@@ -116,7 +116,7 @@ export default function AddPrompt() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">AI Model</label>
+            <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-gray-100">AI Model</label>
             <FormField id="model" as="select" {...register('model')}>
               <option value="any">Any</option>
               <option value="gpt-4o">gpt-4o</option>
@@ -127,12 +127,12 @@ export default function AddPrompt() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Tags (comma separated)</label>
+          <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-gray-100">Tags (comma separated)</label>
           <FormField id="tags" {...register('tags')} />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Prompt</label>
+          <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-gray-100">Prompt</label>
           <FormField id="prompt" as="textarea" {...register('prompt', { required: 'Prompt body is required' })} rows={6} />
           {errors.prompt && <div className="text-sm text-red-500 mt-1">{errors.prompt.message}</div>}
         </div>

@@ -9,7 +9,7 @@ export default function Imported() {
   return (
     <div>
       <BackHomeButton />
-      <h1 className="text-2xl font-semibold mb-4">Imported Prompts</h1>
+      <h1 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Imported Prompts</h1>
 
       {imported.length === 0 ? (
         <p className="text-gray-600 dark:text-gray-300">

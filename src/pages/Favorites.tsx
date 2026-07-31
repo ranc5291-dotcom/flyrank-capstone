@@ -10,7 +10,7 @@ export default function Favorites() {
   return (
     <div>
       <BackHomeButton />
-      <h1 className="text-2xl font-semibold mb-4">Favorites</h1>
+      <h1 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Favorites</h1>
 
       {favorites.length === 0 ? (
         <p className="text-gray-600 dark:text-gray-300">
