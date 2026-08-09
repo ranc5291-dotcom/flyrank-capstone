@@ -80,6 +80,15 @@ const NAV_ITEMS: NavItem[] = [
     ),
   },
   {
+    to: '/ai-workspace',
+    label: 'AI Workspace',
+    icon: (
+      <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zM7.5 19.5 5 22l.75-3.25" />
+      </svg>
+    ),
+  },
+  {
     to: '/settings',
     label: 'Settings',
     icon: (

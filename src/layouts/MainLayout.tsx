@@ -16,9 +16,9 @@ export default function MainLayout() {
   }, [collapsed])
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <Navbar onToggleSidebar={() => setSidebarOpen((s) => !s)} />
-      <div className="flex">
+      <div className="flex flex-1 min-h-0">
         <Sidebar
           open={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
@@ -26,7 +26,13 @@ export default function MainLayout() {
           onToggleCollapse={() => setCollapsed((c) => !c)}
         />
 
-        <main className="flex-1 min-w-0 p-6 lg:p-10">
+        {/* CHANGED: overflow-hidden -> overflow-y-auto so pages like
+            Dashboard scroll at the page level. Pages like AIWorkspace
+            that need fixed-height + internal scrolling (chat window)
+            still work — main's height stays bounded by flex-1 min-h-0,
+            and their own inner overflow-y-auto div handles that scroll
+            before main ever needs to. */}
+        <main className="flex-1 min-w-0 min-h-0 flex flex-col p-6 lg:p-10 overflow-y-auto">
           <Outlet />
         </main>
       </div>
