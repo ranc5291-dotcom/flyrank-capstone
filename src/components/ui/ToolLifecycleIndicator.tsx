@@ -18,7 +18,7 @@ const STAGE_LABELS: Record<Stage, string> = {
 
 const STAGE_ORDER: Stage[] = ["reading", "evaluating", "generating", "done"];
 
-function deriveStage(status: ToolStatus, result?: Partial<PromptAnalysisResult>): Stage {
+function deriveStage(status: ToolStatus, result?: Partial<PromptAnalysisResult> | null): Stage {
   if (status === "complete") return "done";
   if (!result || result.qualityScore === undefined) return "reading";
   if (!result.suggestions || result.suggestions.length === 0) return "evaluating";
