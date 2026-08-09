@@ -46,6 +46,18 @@ async function mockToolApi(page: Page) {
   });
 }
 
+// On mobile viewports the sidebar starts off-screen and is revealed by this
+// toggle. Clicking a nav link does NOT auto-close it, and it's a fixed
+// overlay that intercepts clicks on the tab underneath — so we open it to
+// navigate, then close it again immediately after. On desktop the toggle is
+// hidden (lg:hidden), so isVisible() is false and every call here is a no-op.
+async function openMobileSidebarIfPresent(page: Page) {
+  const menuToggle = page.getByRole("button", { name: /toggle sidebar/i });
+  if (await menuToggle.isVisible()) {
+    await menuToggle.click();
+  }
+}
+
 test.describe("Prompt Analyzer", () => {
   test.beforeEach(async ({ page }) => {
     await mockToolApi(page);
@@ -54,15 +66,10 @@ test.describe("Prompt Analyzer", () => {
   test("analyzes a prompt end to end and saves the optimized version to the library", async ({ page }) => {
     await page.goto("/");
 
-    // On mobile viewports the sidebar starts off-screen (translated out via
-    // CSS) and is only revealed by this toggle. On desktop it's hidden via
-    // lg:hidden, so isVisible() is false there and this is a no-op.
-    const menuToggle = page.getByRole("button", { name: /toggle sidebar/i });
-    if (await menuToggle.isVisible()) {
-      await menuToggle.click();
-    }
-
+    await openMobileSidebarIfPresent(page);
     await page.getByRole("link", { name: /ai workspace/i }).click();
+    await openMobileSidebarIfPresent(page); // close it again — it was left open by the toggle above
+
     await page.getByText(/^analyze prompt$/i).first().click();
 
     const textarea = page.getByPlaceholder(/write a blog post about productivity/i);
@@ -88,14 +95,11 @@ test.describe("Prompt Analyzer", () => {
     await page.getByRole("button", { name: /save to prompt library/i }).click();
     await expect(page.getByText(/prompt saved successfully/i)).toBeVisible();
 
-    // On mobile, navigating away closes the sidebar again, so reopen it
-    // before clicking "Prompt Library".
-    if (await menuToggle.isVisible()) {
-      await menuToggle.click();
-    }
-
     // Confirms it actually persisted, not just a UI toast
+    await openMobileSidebarIfPresent(page);
     await page.getByRole("link", { name: /prompt library/i }).click();
+    await openMobileSidebarIfPresent(page);
+
     await expect(
       page.getByText(/write a blog post about productivity/i).first()
     ).toBeVisible();
@@ -107,12 +111,10 @@ test.describe("Prompt Analyzer", () => {
 
     await page.goto("/");
 
-    const menuToggle = page.getByRole("button", { name: /toggle sidebar/i });
-    if (await menuToggle.isVisible()) {
-      await menuToggle.click();
-    }
-
+    await openMobileSidebarIfPresent(page);
     await page.getByRole("link", { name: /ai workspace/i }).click();
+    await openMobileSidebarIfPresent(page);
+
     await page.getByText(/^analyze prompt$/i).first().click();
 
     await page.getByPlaceholder(/write a blog post about productivity/i).fill("Test prompt");
