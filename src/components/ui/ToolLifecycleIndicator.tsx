@@ -27,10 +27,9 @@ function deriveStage(status: ToolStatus, result?: Partial<PromptAnalysisResult>)
 
 interface ToolLifecycleIndicatorProps {
   status: ToolStatus;
-  result?: Partial<PromptAnalysisResult>;
+  result?: Partial<PromptAnalysisResult> | null;
   error?: string | null;
 }
-
 export function ToolLifecycleIndicator({ status, result, error }: ToolLifecycleIndicatorProps) {
   if (status === "idle") return null;
 
