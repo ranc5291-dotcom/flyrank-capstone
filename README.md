@@ -47,10 +47,16 @@ A productivity workspace for managing, iterating on, and organizing AI prompts �
 - **Component tests (Vitest + React Testing Library):** 25 tests covering chat input validation, message rendering and error states, the Prompt Analyzer's full lifecycle, and the Optimized Prompt section's copy/save flows
 - **End-to-end tests (Playwright):** two full user journeys — analyzing a prompt end-to-end and saving it to the library, and recovering from an API failure via Retry — run against both desktop and mobile viewports
 - **CI (GitHub Actions):** every push to `main` runs a type check, the full Vitest suite, and the full Playwright suite before deploying
+- Zod (runtime validation for API request bodies and AI-generated JSON output)
 
 npm run test # Vitest component tests
 npm run test:e2e # Playwright end-to-end tests
 npm run typecheck # TypeScript check
+
+## API Validation
+
+- `api/tool.ts` validates the incoming request body and the AI-generated JSON (quality score, strengths, weaknesses, suggestions, optimized prompt) against Zod schemas before it reaches the frontend — malformed AI output returns a structured API error instead of breaking the UI
+- `api/chat.ts` validates incoming chat request bodies (message roles and content) with Zod before forwarding to Groq
 
 
 ## Upcoming / Not Yet Built
