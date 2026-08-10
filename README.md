@@ -21,6 +21,7 @@ A productivity workspace for managing, iterating on, and organizing AI prompts �
 - Vitest + React Testing Library (component tests)
 - Playwright (end-to-end tests, desktop + mobile)
 - GitHub Actions (CI: type check, unit tests, E2E tests)
+- Zod (runtime validation for API request bodies and AI-generated JSON output)
 
 ## Features (Completed)
 
@@ -55,8 +56,12 @@ npm run typecheck # TypeScript check
 
 ## API Validation
 
-- `api/tool.ts` validates the incoming request body and the AI-generated JSON (quality score, strengths, weaknesses, suggestions, optimized prompt) against Zod schemas before it reaches the frontend — malformed AI output returns a structured API error instead of breaking the UI
-- `api/chat.ts` validates incoming chat request bodies (message roles and content) with Zod before forwarding to Groq
+## API Validation
+
+## API Validation
+
+- `api/tool.ts` validates the incoming request body (`toolId` restricted to known tools, `input` bounded length) and the AI-generated JSON output against per-tool Zod schemas before it reaches the frontend. The response is fully buffered, parsed, and validated server-side — malformed AI output returns a structured 502 error instead of breaking the UI.
+- `api/chat.ts` validates incoming chat request bodies (message roles and content) with Zod before forwarding to Groq.
 
 
 ## Upcoming / Not Yet Built
