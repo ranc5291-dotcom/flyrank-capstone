@@ -1,5 +1,5 @@
 // src/pages/Login.tsx
-import { FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/AuthProvider";
 import { AIOrb } from "../components/ui/AIOrb";
