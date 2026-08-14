@@ -52,13 +52,6 @@ async function mockToolApi(page: Page) {
 async function loginAsGuest(page: Page) {
   await expect(page).toHaveURL(/\/login$/);
   await page.getByRole("button", { name: /continue as guest/i }).click();
-
-  // Temporary debug: surface the real error if guest sign-in fails
-  const errorLocator = page.getByText(/couldn't start a guest session/i);
-  if (await errorLocator.isVisible({ timeout: 2000 }).catch(() => false)) {
-    console.log("Guest login failed - check Firebase secret values in GitHub");
-  }
-
   await expect(page).toHaveURL("http://localhost:5173/", { timeout: 10_000 });
 }
 
