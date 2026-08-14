@@ -46,6 +46,15 @@ async function mockToolApi(page: Page) {
   });
 }
 
+// ProtectedRoute redirects unauthenticated visitors to /login.
+// Guest sign-in is real Firebase anonymous auth, not a mock, so this
+// exercises the same path a real guest user takes.
+async function loginAsGuest(page: Page) {
+  await expect(page).toHaveURL(/\/login$/);
+  await page.getByRole("button", { name: /continue as guest/i }).click();
+  await expect(page).toHaveURL("http://localhost:5173/");
+}
+
 // On mobile viewports the sidebar starts off-screen and is revealed by this
 // toggle. Clicking a nav link does NOT auto-close it, and it's a fixed
 // overlay that intercepts clicks on the tab underneath — so we open it to
@@ -65,6 +74,7 @@ test.describe("Prompt Analyzer", () => {
 
   test("analyzes a prompt end to end and saves the optimized version to the library", async ({ page }) => {
     await page.goto("/");
+    await loginAsGuest(page);
 
     await openMobileSidebarIfPresent(page);
     await page.getByRole("link", { name: /ai workspace/i }).click();
@@ -110,6 +120,7 @@ test.describe("Prompt Analyzer", () => {
     await page.route("**/api/tool", (route) => route.fulfill({ status: 500, body: "Internal Server Error" }));
 
     await page.goto("/");
+    await loginAsGuest(page);
 
     await openMobileSidebarIfPresent(page);
     await page.getByRole("link", { name: /ai workspace/i }).click();

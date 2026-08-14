@@ -1,3 +1,4 @@
+// src/routes.tsx
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
@@ -12,12 +13,20 @@ import Imported from './pages/Imported'
 import Health from './pages/Health'
 import { Playground } from './playground/Playground'
 import AIWorkspace from './pages/AIWorkspace'
+import ProtectedRoute from './components/ProtectedRoute'
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="login" element={<Login />} />
-      <Route path="/" element={<MainLayout />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Dashboard />} />
         <Route path="library" element={<Library />} />
         <Route path="favorites" element={<Favorites />} />
