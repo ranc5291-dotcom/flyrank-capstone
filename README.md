@@ -1,3 +1,4 @@
+@'
 # AI Prompt Studio
 
 **Build, Organize and Execute AI Workflows**
@@ -85,3 +86,4 @@ HN Charan
 ## License
 
 See [LICENSE](https://github.com/ranc5291-dotcom/flyrank-capstone/blob/main/LICENSE)
+'@ | Set-Content -Path README.md -Encoding UTF8
