@@ -18,6 +18,7 @@ A productivity workspace for managing, iterating on, and organizing AI prompts �
 - React Hook Form
 - jsPDF (PDF export)
 - Groq API (AI Chat + Prompt Analyzer)
+- Firebase Authentication (Google Sign-In + Anonymous/Guest)
 - Vitest + React Testing Library (component tests)
 - Playwright (end-to-end tests, desktop + mobile)
 - GitHub Actions (CI: type check, unit tests, E2E tests)
@@ -33,7 +34,7 @@ A productivity workspace for managing, iterating on, and organizing AI prompts �
 - **Imported Prompts** — dedicated view for prompts brought in via JSON import
 - **Settings** — dark mode, default AI model, export/import data (JSON), clear all data
 - **Health page** — live system status with fetched test data
-- **Authentication (UI-only)** — login/guest flow with persisted session state, no backend
+- **Authentication** — Firebase-backed sign-in with Google, or Continue as Guest (anonymous auth); protected routes redirect unauthenticated users to `/login`; session persists across refresh
 - **Dark mode** — full app-wide theme toggle, persisted across sessions
 - **Responsive design** — tested at mobile (375px) and desktop (1280px) widths, including a collapsible off-canvas sidebar on mobile
 - **AI Workspace** — combined Chat and Prompt Analyzer interface:
@@ -45,10 +46,9 @@ A productivity workspace for managing, iterating on, and organizing AI prompts �
 
 ## Testing
 
-- **Component tests (Vitest + React Testing Library):** 25 tests covering chat input validation, message rendering and error states, the Prompt Analyzer's full lifecycle, and the Optimized Prompt section's copy/save flows
-- **End-to-end tests (Playwright):** two full user journeys — analyzing a prompt end-to-end and saving it to the library, and recovering from an API failure via Retry — run against both desktop and mobile viewports
+- **Component tests (Vitest + React Testing Library):** 30 tests covering chat input validation, message rendering and error states, the Prompt Analyzer's full lifecycle, and the Optimized Prompt section's copy/save flows
+- **End-to-end tests (Playwright):** two full user journeys — analyzing a prompt end-to-end and saving it to the library, and recovering from an API failure via Retry — run against both desktop and mobile viewports, authenticated via the real guest sign-in flow
 - **CI (GitHub Actions):** every push to `main` runs a type check, the full Vitest suite, and the full Playwright suite before deploying
-- Zod (runtime validation for API request bodies and AI-generated JSON output)
 
 npm run test # Vitest component tests
 npm run test:e2e # Playwright end-to-end tests
@@ -56,13 +56,8 @@ npm run typecheck # TypeScript check
 
 ## API Validation
 
-## API Validation
-
-## API Validation
-
 - `api/tool.ts` validates the incoming request body (`toolId` restricted to known tools, `input` bounded length) and the AI-generated JSON output against per-tool Zod schemas before it reaches the frontend. The response is fully buffered, parsed, and validated server-side — malformed AI output returns a structured 502 error instead of breaking the UI.
 - `api/chat.ts` validates incoming chat request bodies (message roles and content) with Zod before forwarding to Groq.
-
 
 ## Upcoming / Not Yet Built
 
@@ -82,7 +77,6 @@ git clone https://github.com/ranc5291-dotcom/flyrank-capstone.git
 cd flyrank-capstone
 npm install
 npm run dev
-
 
 ## Author
 
