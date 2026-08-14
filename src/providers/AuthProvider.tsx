@@ -1,34 +1,53 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-
-const AUTH_KEY = 'apst_logged_in'
+import type { User } from 'firebase/auth'
+import { watchAuthState, signInAsGuest, signInWithGoogle, signOut as firebaseSignOut } from '../lib/firebase'
 
 type AuthContextType = {
   isLoggedIn: boolean
-  login: () => void
-  logout: () => void
+  loading: boolean
+  user: User | null
+  loginAsGuest: () => Promise<void>
+  loginWithGoogle: () => Promise<void>
+  logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    () => localStorage.getItem(AUTH_KEY) === 'true'
-  )
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    localStorage.setItem(AUTH_KEY, String(isLoggedIn))
-  }, [isLoggedIn])
+    const unsubscribe = watchAuthState((firebaseUser) => {
+      setUser(firebaseUser)
+      setLoading(false)
+    })
+    return unsubscribe
+  }, [])
 
-  function login() {
-    setIsLoggedIn(true)
+  async function loginAsGuest() {
+    await signInAsGuest()
   }
 
-  function logout() {
-    setIsLoggedIn(false)
+  async function loginWithGoogle() {
+    await signInWithGoogle()
+  }
+
+  async function logout() {
+    await firebaseSignOut()
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!user,
+        loading,
+        user,
+        loginAsGuest,
+        loginWithGoogle,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
